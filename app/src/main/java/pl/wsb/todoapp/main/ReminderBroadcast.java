@@ -1,5 +1,9 @@
 package pl.wsb.todoapp.main;
 
+import static android.app.PendingIntent.FLAG_MUTABLE;
+import static android.app.PendingIntent.FLAG_UPDATE_CURRENT;
+import static androidx.core.app.NotificationCompat.PRIORITY_DEFAULT;
+
 import android.Manifest;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -23,8 +27,7 @@ public class ReminderBroadcast extends BroadcastReceiver {
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("It's high time to act")
                 .setContentText(todoText)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setOngoing(true);
+                .setPriority(PRIORITY_DEFAULT);
 
         PendingIntent contentIntent = PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
