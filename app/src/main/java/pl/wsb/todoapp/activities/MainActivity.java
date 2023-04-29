@@ -1,6 +1,7 @@
 package pl.wsb.todoapp.activities;
 
 import static android.app.PendingIntent.FLAG_MUTABLE;
+import static android.app.PendingIntent.FLAG_UPDATE_CURRENT;
 
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
@@ -67,9 +68,9 @@ public class MainActivity extends AppCompatActivity implements AddTodoDialog.Add
     public void addTodo(CreateToDoData createToDoData) {
         APP_STATE.addTodo(new ToDo(createToDoData.getText(), LocalDateTime.now()));
         if (createToDoData.isSendNotification()) {
-            Intent intent = new Intent(this, ReminderBroadcast.class);
+            Intent intent = new Intent(getApplicationContext(), ReminderBroadcast.class);
             intent.putExtra("TODO_TEXT", createToDoData.getText());
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, FLAG_MUTABLE);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, FLAG_UPDATE_CURRENT | FLAG_MUTABLE);
             AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
             long triggerAtMillis = createToDoData.getNotificationDateTime().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();

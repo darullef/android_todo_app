@@ -1,7 +1,5 @@
 package pl.wsb.todoapp.main;
 
-import static android.app.PendingIntent.FLAG_MUTABLE;
-import static android.app.PendingIntent.FLAG_UPDATE_CURRENT;
 import static androidx.core.app.NotificationCompat.PRIORITY_DEFAULT;
 
 import android.Manifest;
@@ -22,16 +20,17 @@ public class ReminderBroadcast extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Intent mainActivityIntent = new Intent(context, MainActivity.class);
+        mainActivityIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, mainActivityIntent, PendingIntent.FLAG_IMMUTABLE);
+
         String todoText = intent.getStringExtra("TODO_TEXT");
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "TODO_APP_NOTIFICATION_CHANNEL_ID")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("It's high time to act")
                 .setContentText(todoText)
-                .setPriority(PRIORITY_DEFAULT);
-
-        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-
-        builder.setContentIntent(contentIntent);
+                .setPriority(PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent);
 
         NotificationManagerCompat manager = NotificationManagerCompat.from(context);
 
