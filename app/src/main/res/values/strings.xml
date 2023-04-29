@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ToDoApp</string>
+    <string name="open_add_todo_dialogue">Open add todo dialogue</string>
+    <string name="type_your_todo">Type your todo</string>
+    <string name="add">Add</string>
+    <string name="send_notification">Send notification</string>
+    <string name="select_date_and_time">Select date and time</string>
+</resources>

@@ -1,0 +1,13 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+    id 'com.android.application' version '7.4.2' apply false
+    id 'com.android.library' version '7.4.2' apply false
+}
+
+dependencies {
+    'com.android.support:recyclerview-v7:21.0.0'
+    'com.android.support:support-v4:20.+'
+    'com.daimajia.swipelayout:library:1.2.0@aar'
+    'org.projectlombok:lombok:1.18.26'
+    'com.google.code.gson:gson:2.8.9'
+}
